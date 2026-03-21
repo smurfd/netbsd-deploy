@@ -4,7 +4,8 @@
 version=10.0
 arch=amd64
 doas pkgin install -y wget
-wget -r --no-parent --no-check-certificate http://ftp.fr.netbsd.org/pub/NetBSD/NetBSD-$version/$arch/binary/sets/ > /dev/null
+wget -r --no-parent --no-check-certificate http://ftp.fr.netbsd.org/pub/NetBSD/NetBSD-$version/$arch/binary/sets/ > /dev/null 2>&1
+cd ftp.fr.netbsd.org/pub/NetBSD/NetBSD-$version/$arch/binary/sets/
 
 doas mv /netbsd /netbsd.old
 
@@ -26,5 +27,6 @@ echo skipping: debug.tar.xz etc.tar.xz games.tar.xz xdebug.tar.xz xetc.tar.xz
 echo Extraction complete
 doas installboot -v /dev/rdk0 /usr/mdec/bootxx_ffsv2
 
-echo "http://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$arch/$version/All" > /usr/pkg/etc/pkgin/repositories.conf
+echo "http://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$arch/$version/All" > repo.conf
+doas cp repo.conf /usr/pkg/etc/pkgin/repositories.conf
 doas pkgin update && doas pkgin upgrade
