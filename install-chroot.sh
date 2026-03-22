@@ -8,12 +8,13 @@ usr=smurfd
 host=flag.net
 rout=192.168.0.1
 pkgrel=2025Q4
+disc=dk0
 cat > /etc/fstab << EOF
-/dev/wd0b               /       ffs     rw               1 1
-/dev/wd0c               none    swap    sw,dp            0 0
-/dev/wd0d               /usr    ffs     rw               1 2
-/dev/wd0e               /var    ffs     rw               1 2
-/dev/wd0f               /home   ffs     rw               1 2
+/dev/{$disc}b               /       ffs     rw               1 1
+/dev/{$disc}c               none    swap    sw,dp            0 0
+/dev/{$disc}d               /usr    ffs     rw               1 2
+/dev/{$disc}e               /var    ffs     rw               1 2
+/dev/{$disc}f               /home   ffs     rw               1 2
 kernfs                  /kern   kernfs  rw
 ptyfs                   /dev/pts        ptyfs   rw
 procfs                  /proc   procfs  rw
@@ -76,4 +77,3 @@ doas rm -- /usr/+*
 echo "http://cdn.NetBSD.org/pub/pkgsrc/packages/NetBSD/$arch/$version/All" > repo.conf
 doas cp -f /usr/pkg/etc/pkgin/repositories.conf /usr/pkg/etc/pkgin/repositories.conf.$today
 doas cp repo.conf /usr/pkg/etc/pkgin/repositories.conf
-
