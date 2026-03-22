@@ -2,7 +2,7 @@
 # Use with care, have not tried yet on a live system, only vm so far
 version=10.0
 arch=amd64
-today=`date date +"%y-%m-%d"`
+today=`date +"%y-%m-%d"`
 echo Downloading sets...
 doas pkgin -y install wget
 wget -r --no-parent --no-check-certificate http://ftp.fr.netbsd.org/pub/NetBSD/NetBSD-$version/$arch/binary/sets/ > /dev/null 2>&1
