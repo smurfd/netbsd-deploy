@@ -11,7 +11,7 @@ gpt add -a 2m -s 5g -t ffs -l "netbsd-root" $disc
 gpt add -a 2m -s 8g -t swap -l "netbsd-swap" $disc
 gpt add -a 2m -s 5g -t ffs -l "netbsd-var" $disc
 gpt add -a 2m -s 20g -t ffs -l "netbsd-usr" $disc
-gpt add -a 2m -t ffs -l "netbsd-home”
+gpt add -a 2m -t ffs -l "netbsd-home"
 
 # format partitions
 newfs_msdos -F 16 /dev/dk0
