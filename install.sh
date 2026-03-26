@@ -32,10 +32,16 @@ mount /dev/dk3 /mnt/var
 mount /dev/dk4 /mnt/usr
 mount /dev/dk5 /mnt/home
 
+# setup install network
+ifconfig wm0 192.168.0.98 netmask 0xffffff00
+route add default 192.168.0.1
+
 # extract binary sets
+cd /tmp
+ftp ftp://ftp.netbsd.org/pub/NetBSD/NetBSD-10.0/amd64/binary/sets/*
 cd /mnt
 for set in kern-GENERIC base comp etc games man misc modules tests text xbase xcomp xetc xfont xserver; do
-  > tar -xzpf /amd64/binary/sets/$set.tar.xz
+  > tar -xzpf /tmp/$set.tar.xz
   > done
 mv netbsd netbsd.$today && ln -fh netbsd.$today netbsd
 
@@ -44,7 +50,7 @@ mount -t msdos /dev/dk0 /media
 mkdir -p  /media/EFI/boot
 cp /usr/mdec/*.efi /media/EFI/boot
 
-cat > /media/EFI/boot/boot.cfg << "EOF"
+cat > /media/EFI/boot/boot.cfg << EOF
 menu=Boot normally:rndseed /etc/entropy-file;boot hd0b:netbsd
 menu=Boot single user:rndseed /etc/entropy-file;boot hd0b:netbsd -s
 menu=Disable ACPI:rndseed /etc/entropy-file;boot hd0b:netbsd -2
