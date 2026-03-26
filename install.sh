@@ -39,6 +39,7 @@ route add default 192.168.0.1
 # extract binary sets
 cd /tmp
 ftp ftp://ftp.netbsd.org/pub/NetBSD/NetBSD-10.0/amd64/binary/sets/*
+sha512sum --check SHA512
 cd /mnt
 for set in kern-GENERIC base comp etc games man misc modules tests text xbase xcomp xetc xfont xserver; do
   > tar -xzpf /tmp/$set.tar.xz
